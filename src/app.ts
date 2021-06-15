@@ -52,10 +52,34 @@ class ProjectInput {
     this.attach();
   }
 
+  //return type is a tuple for this to return these three types for these three elements
+  private gatherUserInput(): [string, string, number] | void {
+    const enteredTitle = this.titleInputElement.value;
+    const enteredDescription = this.descriptionInputElement.value;
+    const enteredPeople = this.peopleInputElement.value;
+
+    if (
+      enteredTitle.trim().length === 0 ||
+      enteredDescription.trim().length === 0 ||
+      enteredPeople.trim().length === 0
+    ) {
+      alert("invalid input, please try again");
+      return; // the return of this function could be void
+    } else {
+      return [enteredTitle, enteredDescription, +enteredPeople];
+    }
+  }
+
   @autobind
   private submitHandler(event: Event) {
     event.preventDefault();
-    console.log(this.titleInputElement.value);
+    const userInput = this.gatherUserInput();
+
+    // next check if tuple
+    if (Array.isArray(userInput)) {
+      const [title, desc, people] = userInput;
+      console.log(title, desc, people);
+    }
   }
 
   private configure() {

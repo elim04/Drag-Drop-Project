@@ -20,7 +20,29 @@ class ProjectInput {
 
     this.element = importedNode.firstElementChild as HTMLFormElement;
     this.element.id = "user-input";
+
+    //input elements
+    this.titleInputElement = this.element.querySelector(
+      "#title"
+    ) as HTMLInputElement;
+    this.descriptionInputElement = this.element.querySelector(
+      "#description"
+    ) as HTMLInputElement;
+    this.peopleInputElement = this.element.querySelector(
+      "#people"
+    ) as HTMLInputElement;
+    this.configure();
     this.attach();
+  }
+
+  private submitHandler(event: Event) {
+    event.preventDefault();
+    console.log(this.titleInputElement.value);
+  }
+
+  private configure() {
+    //the form
+    this.element.addEventListener("submit", this.submitHandler.bind(this));
   }
 
   private attach() {
